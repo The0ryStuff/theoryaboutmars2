@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-section="title-tag">El Génesis de la Humanidad: De Marte al Edén</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: #E0E0E0;
+            transition: background-image 1s ease-in-out, background-position 1s ease-in-out;
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-position: center top;
+            position: relative;
+        }
+
+        .bg-gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
+            z-index: -1;
+        }
+        
+        .bg-mars-sand { background-color: #FDF6E3; }
+        .bg-mars-dune { background-color: #EEE8D5; }
+        .text-mars-rock { color: #657B83; }
+        .text-mars-base { color: #586E75; }
+        .accent-eden-green { color: #859900; }
+        .accent-sky-blue { color: #268BD2; }
+        .border-mars-dune { border-color: #EEE8D5; }
+        
+        .nav-link.active {
+            color: #D33682; /* Color de acento */
+            font-weight: 600;
+        }
+        
+        .details-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .details-content.open {
+            max-height: 1000px; /* Ajustar según sea necesario para contener el texto completo */
+        }
+        
+        .message-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+            text-align: center;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        /* Estilos para móviles */
+        @media (max-width: 768px) {
+            .nav-links-container {
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                display: none;
+            }
+            .nav-links-container.open {
+                display: flex;
+            }
+            .nav-links-container li {
+                width: 100%;
+                text-align: center;
+                padding: 1rem 0;
+            }
+            .nav-links-container li a {
+                display: block;
+            }
+        }
+        .content-box {
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(1px);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-bg-text {
+            color: #E0E0E0;
+        }
+
+    </style>
+</head>
+<body class="bg-mars-sand text-mars-base">
+    <div class="bg-gradient-overlay"></div>
+
+    <!-- Encabezado de Navegación Fijo -->
+    <header class="sticky top-0 z-50 bg-black/50 backdrop-blur-lg shadow-sm">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center text-white">
+            <!-- Enlaces de Navegación -->
+            <ul class="flex-1 flex justify-center space-x-4 md:space-x-8 text-sm md:text-base">
+                <li><a href="#introduction" id="nav-introduction" class="nav-link hover:text-cyan-400 transition-colors">Introducción</a></li>
+                <li><a href="#ancient-world" id="nav-ancient-world" class="nav-link hover:text-cyan-400 transition-colors">Mundo Antiguo</a></li>
+                <li><a href="#lost-paradise" id="nav-lost-paradise" class="nav-link hover:text-cyan-400 transition-colors">El Paraíso Perdido</a></li>
+                <li><a href="#migration" id="nav-migration" class="nav-link hover:text-cyan-400 transition-colors">Migración</a></li>
+                <li><a href="#ancient-texts" id="nav-ancient-texts" class="nav-link hover:text-cyan-400 transition-colors">Textos Antiguos</a></li>
+                <li><a href="#references" id="nav-references" class="nav-link hover:text-cyan-400 transition-colors">Referencias</a></li>
+            </ul>
+            <!-- Entrada y botón de idioma -->
+            <div class="flex items-center space-x-2">
+                <input type="text" id="custom-language-input" placeholder="Escribe 'es', 'español', o 'japanese'" class="rounded-lg p-1 bg-gray-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-accent-sky-blue" data-section="input-placeholder">
+                <button id="custom-language-btn" class="rounded-lg px-3 py-1 bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 transition-colors" data-section="button-text">Traducir</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-8 md:py-16">
+
+        <!-- Sección de Introducción -->
+        <section id="introduction" class="text-center mb-16 md:mb-24 content-box dark-bg-text">
+            <h1 class="text-3xl md:text-5xl font-bold text-gray-200 mb-4" data-section="introduction-title">El Génesis de la Humanidad</h1>
+            <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto" data-section="introduction-subtitle">Una exploración científica de la teoría que postula a Marte como el Edén original, un mundo perdido cuyos supervivientes pudieron haber sembrado la vida en la Tierra.</p>
+            <div class="mt-8 text-lg text-gray-300 max-w-3xl mx-auto text-left leading-relaxed">
+                <p data-content="intro-p1">La búsqueda para entender los orígenes humanos ha sido durante mucho tiempo un tema de fascinación. Si bien las narrativas tradicionales a menudo rastrean los orígenes de la humanidad hasta la Tierra, la evidencia científica emergente sugiere un origen más complejo e intrigante, uno que puede vincular a la humanidad con el planeta Marte. Esta teoría postula que los primeros humanos, o una especie precursora, alguna vez prosperaron en Marte, un planeta que, en su pasado distante, albergaba condiciones propicias para la vida. Con el tiempo, eventos catastróficos hicieron que Marte fuera inhóspito, lo que provocó la migración de sus habitantes a la Tierra. Esta narrativa se entrelaza con mitos antiguos, como el relato bíblico del Jardín del Edén, ofreciendo una síntesis convincente de ciencia y leyenda.</p>
+            </div>
+        </section>
+
+        <!-- Sección de Mundo Antiguo -->
+        <section id="ancient-world" class="mb-16 md:mb-24 content-box dark-bg-text">
+            <h2 class="text-2xl md:text-4xl font-bold text-center text-gray-200 mb-2" data-section="ancient-world-title">Un Mundo Antiguo y Habitable</h2>
+            <p class="text-center text-lg text-gray-300 mb-12 max-w-2xl mx-auto" data-section="ancient-world-subtitle">La evidencia científica sugiere que el Marte primitivo era muy diferente del desierto helado que conocemos hoy. Era un mundo dinámico con los ingredientes clave para la vida. Explora la evidencia a continuación.</p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Tarjeta 1: Evidencia de Agua Antigua -->
+                <div class="p-6 rounded-lg shadow-md bg-white/10 dark-bg-text">
+                    <h3 class="text-xl font-bold mb-3 accent-sky-blue flex items-center text-cyan-400" data-content="eden-card1-title"><span class="text-3xl mr-3">💧</span>Evidencia de Agua Antigua</h3>
+                    <p class="mb-4" data-content="eden-card1-summary">Misiones como Curiosity y Perseverance han encontrado lechos de ríos secos, deltas y minerales que solo se forman en presencia de agua.</p>
+                    <button class="font-semibold accent-sky-blue hover:underline details-toggle text-cyan-400" data-target="details-water" data-content="eden-card1-button">Leer más...</button>
+                    <div id="details-water" class="details-content mt-4 text-gray-300">
+                        <p data-content="eden-card1-details">El rover Curiosity, en el cráter Gale, ha identificado estructuras sedimentarias indicativas de lagos y ríos de larga data. El descubrimiento de rocas con ondas de olas sugiere la presencia de antiguas costas, mientras que los depósitos minerales apuntan a la evaporación de cuerpos de agua. Estos hallazgos son corroborados por las observaciones del rover Perseverance en el cráter Jezero, donde una formación de delta indica la existencia pasada de un sistema fluvial que desembocaba en un lago.</p>
+                    </div>
+                </div>
+                <!-- Tarjeta 2: Atmósfera Densa -->
+                <div class="p-6 rounded-lg shadow-md bg-white/10 dark-bg-text">
+                    <h3 class="text-xl font-bold mb-3 accent-eden-green flex items-center text-green-400" data-content="eden-card2-title"><span class="text-3xl mr-3">💨</span>Atmósfera Densa</h3>
+                    <p class="mb-4" data-content="eden-card2-summary">La investigación indica que Marte tenía una atmósfera mucho más densa, capaz de atrapar el calor y mantener temperaturas por encima del punto de congelación.</p>
+                    <button class="font-semibold accent-eden-green hover:underline details-toggle text-green-400" data-target="details-atmo" data-content="eden-card2-button">Leer más...</button>
+                    <div id="details-atmo" class="details-content mt-4 text-gray-300">
+                        <p data-content="eden-card2-details">Se estima que la atmósfera primitiva era de 10 a 20 veces más densa de lo que es hoy. Este escudo atmosférico habría creado un efecto invernadero, manteniendo un clima templado y permitiendo la existencia de agua líquida en la superficie. La presencia de minerales como arcillas y carbonatos, que se forman en ambientes acuosos, apoya esta hipótesis.</p>
+                    </div>
+                </div>
+                <!-- Tarjeta 3: Eventos Catastróficos -->
+                <div class="p-6 rounded-lg shadow-md bg-white/10 dark-bg-text">
+                    <h3 class="text-xl font-bold mb-3 text-orange-500 flex items-center" data-content="eden-card3-title"><span class="text-3xl mr-3">💥</span>Eventos Catastróficos</h3>
+                    <p class="mb-4" data-content="eden-card3-summary">El registro geológico revela inundaciones masivas, como las que formaron los Kasei Valles, que alteraron drásticamente el planeta.</p>
+                    <button class="font-semibold text-orange-500 hover:underline details-toggle" data-target="details-geo" data-content="eden-card3-button">Leer más...</button>
+                    <div id="details-geo" class="details-content mt-4 text-gray-300">
+                        <p data-content="eden-card3-details">Características como los Kasei Valles, un sistema de canales de más de 1,800 millas de largo, sugieren que enormes volúmenes de agua fluyeron una vez a través de la superficie del planeta. Se cree que estos canales de desborde se formaron a partir de inundaciones catastróficas, posiblemente desencadenadas por la liberación repentina de agua subsuperficial. Tales eventos habrían alterado masivamente el clima y las condiciones de la superficie del planeta.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de El Paraíso Perdido -->
+        <section id="lost-paradise" class="mb-16 md:mb-24 content-box dark-bg-text">
+            <h2 class="text-2xl md:text-4xl font-bold text-center text-gray-200 mb-2" data-section="lost-paradise-title">El Paraíso Perdido</h2>
+            <p class="text-center text-lg text-gray-300 mb-12 max-w-2xl mx-auto" data-section="lost-paradise-subtitle">El entorno habitable de Marte no duró. Una serie de cambios planetarios lo transformaron en el mundo hostil que es hoy, haciendo imposible la vida en la superficie.</p>
+            <div class="relative w-full max-w-2xl mx-auto p-4">
+                <div class="border-l-2 border-dashed border-gray-500 absolute h-full top-0 left-4"></div>
+                <div class="mb-8 pl-8 relative">
+                    <div class="absolute w-4 h-4 bg-red-500 rounded-full -left-2 top-1 border-4 border-gray-900"></div>
+                    <h4 class="font-bold text-lg text-red-400" data-content="decline-step1-title">Pérdida del Campo Magnético</h4>
+                    <p data-content="decline-step1-text">El núcleo de Marte se enfrió, debilitando su campo magnético protector. Sin este escudo, el viento solar comenzó a despojar al planeta de su atmósfera.</p>
+                </div>
+                <div class="mb-8 pl-8 relative">
+                    <div class="absolute w-4 h-4 bg-sky-500 rounded-full -left-2 top-1 border-4 border-gray-900"></div>
+                    <h4 class="font-bold text-lg text-sky-400" data-content="decline-step2-title">Adelgazamiento de la Atmósfera</h4>
+                    <p data-content="decline-step2-text">Con la atmósfera erosionándose, la presión del aire cayó drásticamente. El agua líquida en la superficie se evaporó o se congeló.</p>
+                </div>
+                <div class="pl-8 relative">
+                    <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-2 top-1 border-4 border-gray-900"></div>
+                    <h4 class="font-bold text-lg text-gray-400" data-content="decline-step3-title">Radiación y Desolación</h4>
+                    <p data-content="decline-step3-text">Sin protección atmosférica ni magnética, la superficie se volvió vulnerable a la radiación solar y cósmica, esterilizando el planeta.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de La Gran Migración -->
+        <section id="migration" class="text-center mb-16 md:mb-24 content-box dark-bg-text">
+            <h2 class="text-2xl md:text-4xl font-bold text-center text-gray-200 mb-2" data-section="migration-title">La Gran Migración</h2>
+            <p class="text-center text-lg text-gray-300 mb-12 max-w-2xl mx-auto" data-section="migration-subtitle">Esta teoría postula que la civilización marciana superviviente migró a la Tierra, llevando consigo conocimientos y tecnologías avanzadas. Se convirtieron en los progenitores de la humanidad moderna.</p>
+            <div class="text-lg text-gray-300 max-w-3xl mx-auto text-left leading-relaxed">
+                <p data-content="migration-p1">La teoría postula que los supervivientes de la civilización marciana migraron a la Tierra, trayendo consigo conocimientos y tecnologías avanzadas. Esta migración podría explicar la aparición repentina de sociedades humanas avanzadas en la historia de la Tierra. Los estudios genéticos han identificado ciertos rasgos únicos en los humanos que no se encuentran en otros primates, lo que sugiere un posible origen extraterrestre.</p>
+            </div>
+        </section>
+
+        <!-- Sección de Textos Antiguos -->
+        <section id="ancient-texts" class="mb-16 md:mb-24 content-box dark-bg-text">
+            <h2 class="text-2xl md:text-4xl font-bold text-center text-gray-200 mb-2" data-section="ancient-texts-title">Ecos en Textos Antiguos</h2>
+            <p class="text-center text-lg text-gray-300 mb-12 max-w-2xl mx-auto" data-section="ancient-texts-subtitle">La narrativa de un paraíso perdido y los orígenes de la humanidad que se encuentra en muchos mitos antiguos, incluida la Biblia, tienen similitudes sorprendentes con esta teoría científica.</p>
+            <div class="grid md:grid-cols-2 gap-8 text-left">
+                <div class="p-6 rounded-lg shadow-md bg-white/10 dark-bg-text">
+                    <h3 class="text-xl font-bold mb-3 text-green-400 flex items-center" data-content="parallels-left-title"><span class="text-3xl mr-3">🌳</span>El Jardín del Edén</h3>
+                    <p data-content="parallels-left-text">El relato bíblico del Jardín del Edén como un paraíso perdido tiene similitudes sorprendentes con la historia propuesta de Marte. La expulsión del Edén podría simbolizar los eventos catastróficos que llevaron al declive de la habitabilidad marciana y la posterior migración forzada.</p>
+                </div>
+                <div class="p-6 rounded-lg shadow-md bg-white/10 dark-bg-text">
+                    <h3 class="text-xl font-bold mb-3 text-cyan-400 flex items-center" data-content="parallels-right-title"><span class="text-3xl mr-3">⏳</span>Largas Vidas</h3>
+                    <p data-content="parallels-right-text">Las largas vidas atribuidas a los primeros humanos en la Biblia pueden reflejar la longevidad mejorada de los habitantes marcianos, que vivieron en un entorno más favorable. Estos podrían ser los ecos genéticos de una vida pasada en un planeta diferente.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Referencias -->
+        <section id="references" class="mb-16 md:mb-24 text-center content-box dark-bg-text">
+            <h2 class="text-2xl md:text-4xl font-bold text-gray-200 mb-6" data-section="references-title">Referencias</h2>
+            <div class="text-left text-sm text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                <ul id="references-list" class="list-disc list-inside space-y-2">
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para Mensajes -->
+    <div id="messageBox" class="message-box bg-gray-800 text-gray-200">
+        <p id="messageText" class="mb-4"></p>
+        <button id="closeBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors">Cerrar</button>
+    </div>
+    <div id="overlay" class="overlay"></div>
+
+    <script>
+        // Objeto de traducción principal para el contenido de la página
+        const translations = {
+            'es': {
+                nativeName: 'Español',
+                aliases: ['spanish', 'espanol', 'español', 'es', 'es_ES'],
+                'title-tag': 'El Génesis de la Humanidad: De Marte al Edén',
+                'nav-introduction': 'Introducción',
+                'nav-ancient-world': 'Mundo Antiguo',
+                'nav-lost-paradise': 'El Paraíso Perdido',
+                'nav-migration': 'Migración',
+                'nav-ancient-texts': 'Textos Antiguos',
+                'nav-references': 'Referencias',
+                'input-placeholder': 'Escribe \'es\', \'español\', o \'japanese\'',
+                'button-text': 'Traducir',
+                'introduction-title': 'El Génesis de la Humanidad',
+                'introduction-subtitle': 'Una exploración científica de la teoría que postula a Marte como el Edén original, un mundo perdido cuyos supervivientes pudieron haber sembrado la vida en la Tierra.',
+                'intro-p1': 'La búsqueda para entender los orígenes humanos ha sido durante mucho tiempo un tema de fascinación. Si bien las narrativas tradicionales a menudo rastrean los orígenes de la humanidad hasta la Tierra, la evidencia científica emergente sugiere un origen más complejo e intrigante, uno que puede vincular a la humanidad con el planeta Marte. Esta teoría postula que los primeros humanos, o una especie precursora, alguna vez prosperaron en Marte, un planeta que, en su pasado distante, albergaba condiciones propicias para la vida. Con el tiempo, eventos catastróficos hicieron que Marte fuera inhóspito, lo que provocó la migración de sus habitantes a la Tierra. Esta narrativa se entrelaza con mitos antiguos, como el relato bíblico del Jardín del Edén, ofreciendo una síntesis convincente de ciencia y leyenda.',
+                'ancient-world-title': 'Un Mundo Antiguo y Habitable',
+                'ancient-world-subtitle': 'La evidencia científica sugiere que el Marte primitivo era muy diferente del desierto helado que conocemos hoy. Era un mundo dinámico con los ingredientes clave para la vida. Explora la evidencia a continuación.',
+                'eden-card1-title': '💧Evidencia de Agua Antigua',
+                'eden-card1-summary': 'Misiones como Curiosity y Perseverance han encontrado lechos de ríos secos, deltas y minerales que solo se forman en presencia de agua.',
+                'eden-card1-button': 'Leer más...',
+                'eden-card1-details': 'El rover Curiosity, en el cráter Gale, ha identificado estructuras sedimentarias indicativas de lagos y ríos de larga data. El descubrimiento de rocas con ondas de olas sugiere la presencia de antiguas costas, mientras que los depósitos minerales apuntan a la evaporación de cuerpos de agua. Estos hallazgos son corroborados por las observaciones del rover Perseverance en el cráter Jezero, donde una formación de delta indica la existencia pasada de un sistema fluvial que desembocaba en un lago.',
+                'eden-card2-title': '💨Atmósfera Densa',
+                'eden-card2-summary': 'La investigación indica que Marte tenía una atmósfera mucho más densa, capaz de atrapar el calor y mantener temperaturas por encima del punto de congelación.',
+                'eden-card2-button': 'Leer más...',
+                'eden-card2-details': 'Se estima que la atmósfera primitiva era de 10 a 20 veces más densa de lo que es hoy. Este escudo atmosférico habría creado un efecto invernadero, manteniendo un clima templado y permitiendo la existencia de agua líquida en la superficie. La presencia de minerales como arcillas y carbonatos, que se forman en ambientes acuosos, apoya esta hipótesis.',
+                'eden-card3-title': '💥Eventos Catastróficos',
+                'eden-card3-summary': 'El registro geológico revela inundaciones masivas, como las que formaron los Kasei Valles, que alteraron drásticamente el planeta.',
+                'eden-card3-button': 'Leer más...',
+                'eden-card3-details': 'Características como los Kasei Valles, un sistema de canales de más de 1,800 millas de largo, sugieren que enormes volúmenes de agua fluyeron una vez a través de la superficie del planeta. Se cree que estos canales de desborde se formaron a partir de inundaciones catastróficas, posiblemente desencadenadas por la liberación repentina de agua subsuperficial. Tales eventos habrían alterado masivamente el clima y las condiciones de la superficie del planeta.',
+                'lost-paradise-title': 'El Paraíso Perdido',
+                'lost-paradise-subtitle': 'El entorno habitable de Marte no duró. Una serie de cambios planetarios lo transformaron en el mundo hostil que es hoy, haciendo imposible la vida en la superficie.',
+                'decline-step1-title': 'Pérdida del Campo Magnético',
+                'decline-step1-text': 'El núcleo de Marte se enfrió, debilitando su campo magnético protector. Sin este escudo, el viento solar comenzó a despojar al planeta de su atmósfera.',
+                'decline-step2-title': 'Adelgazamiento de la Atmósfera',
+                'decline-step2-text': 'Con la atmósfera erosionándose, la presión del aire cayó drásticamente. El agua líquida en la superficie se evaporó o se congeló.',
+                'decline-step3-title': 'Radiación y Desolación',
+                'decline-step3-text': 'Sin protección atmosférica ni magnética, la superficie se volvió vulnerable a la radiación solar y cósmica, esterilizando el planeta.',
+                'migration-title': 'La Gran Migración',
+                'migration-subtitle': 'Esta teoría postula que la civilización marciana superviviente migró a la Tierra, llevando consigo conocimientos y tecnologías avanzadas. Se convirtieron en los progenitores de la humanidad moderna.',
+                'migration-p1': 'La teoría postula que los supervivientes de la civilización marciana migraron a la Tierra, trayendo consigo conocimientos y tecnologías avanzadas. Esta migración podría explicar la aparición repentina de sociedades humanas avanzadas en la historia de la Tierra. Los estudios genéticos han identificado ciertos rasgos únicos en los humanos que no se encuentran en otros primates, lo que sugiere un posible origen extraterrestre.',
+                'ancient-texts-title': 'Ecos en Textos Antiguos',
+                'ancient-texts-subtitle': 'La narrativa de un paraíso perdido y los orígenes de la humanidad que se encuentra en muchos mitos antiguos, incluida la Biblia, tienen similitudes sorprendentes con esta teoría científica.',
+                'parallels-left-title': '🌳El Jardín del Edén',
+                'parallels-left-text': 'El relato bíblico del Jardín del Edén como un paraíso perdido tiene similitudes sorprendentes con la historia propuesta de Marte. La expulsión del Edén podría simbolizar los eventos catastróficos que llevaron al declive de la habitabilidad marciana y la posterior migración forzada.',
+                'parallels-right-title': '⏳Largas Vidas',
+                'parallels-right-text': 'Las largas vidas atribuidas a los primeros humanos en la Biblia pueden reflejar la longevidad mejorada de los habitantes marcianos, que vivieron en un entorno más favorable. Estos podrían ser los ecos genéticos de una vida pasada en un planeta diferente.',
+                'references-title': 'Referencias',
+                'references-youtube-1': 'Mars Rover Captures Evidence of Lost Civilization?!',
+                'references-youtube-2': 'Mars Rover Curiosity SOL 0929',
+                'references-youtube-3': 'Mars Rover Curiosity SOL 1373',
+                'message-unsupported': 'Lo siento, el idioma que ingresaste aún no es compatible. Por favor, intenta con un idioma diferente.',
+                'message-default-lang': 'No se encontró un idioma compatible. El sitio se mostrará en inglés.',
+                'close-button': 'Cerrar',
+                'references-nasa-1': 'NASA\'s Curiosity Rover Detects Largest Organic Molecules Found on Mars. NASA.',
+                'references-nasa-2': 'NASA\'s Perseverance Rover Investigates Geologically Rich Mars Terrain. NASA.',
+                'references-nasa-3': 'NASA\'s Curiosity Finds Surprise Clues to Mars\' Watery Past. NASA.',
+                'references-nasa-4': 'NASA\'s Perseverance Rover Deciphers Ancient History of Martian Lake. NASA.'
+            },
+            'en': {
+                nativeName: 'English',
+                aliases: ['english', 'en', 'en_US', 'ingles'],
+                'title-tag': 'The Genesis of Humanity: From Mars to Eden',
+                'nav-introduction': 'Introduction',
+                'nav-ancient-world': 'Ancient World',
+                'nav-lost-paradise': 'The Lost Paradise',
+                'nav-migration': 'Migration',
+                'nav-ancient-texts': 'Ancient Texts',
+                'nav-references': 'References',
+                'input-placeholder': 'Enter \'en\', \'English\', or \'espanol\'',
+                'button-text': 'Translate',
+                'introduction-title': 'The Genesis of Humanity',
+                'introduction-subtitle': 'A scientific exploration of the theory that posits Mars as the original Eden, a lost world whose survivors may have seeded life on Earth.',
+                'intro-p1': 'The quest to understand human origins has long been a topic of fascination. While traditional narratives often trace humanity\'s beginnings to Earth, emerging scientific evidence suggests a more complex and intriguing origin, one that may link humanity to the planet Mars. This theory posits that early humans, or a precursor species, once thrived on Mars, a planet that, in its distant past, harbored conditions conducive to life. Over time, catastrophic events rendered Mars inhospitable, prompting the migration of its inhabitants to Earth. This narrative intertwines with ancient myths, such as the biblical account of the Garden of Eden, offering a compelling synthesis of science and legend.',
+                'ancient-world-title': 'An Ancient, Habitable World',
+                'ancient-world-subtitle': 'Scientific evidence suggests that early Mars was vastly different from the frigid desert we know today. It was a dynamic world with the key ingredients for life. Explore the evidence below.',
+                'eden-card1-title': '💧Evidence of Ancient Water',
+                'eden-card1-summary': 'Missions like Curiosity and Perseverance have found dry riverbeds, deltas, and minerals that only form in the presence of water.',
+                'eden-card1-button': 'Read more...',
+                'eden-card1-details': 'The Curiosity rover, in the Gale crater, has identified sedimentary structures indicative of long-standing lakes and rivers. The discovery of rocks with wave ripples suggests the presence of ancient shorelines, while mineral deposits point to the evaporation of bodies of water. These findings are corroborated by the Perseverance rover\'s observations in Jezero Crater, where a delta formation indicates the past existence of a river system that flowed into a lake.',
+                'eden-card2-title': '💨Thick Atmosphere',
+                'eden-card2-summary': 'Research indicates that Mars had a much denser atmosphere, capable of trapping heat and maintaining temperatures above freezing.',
+                'eden-card2-button': 'Read more...',
+                'eden-card2-details': 'The early atmosphere is estimated to have been 10 to 20 times thicker than it is today. This atmospheric shield would have created a greenhouse effect, maintaining a temperate climate and allowing for the existence of liquid water on the surface. The presence of minerals like clays and carbonates, which form in watery environments, supports this hypothesis.',
+                'eden-card3-title': '💥Cataclysmic Events',
+                'eden-card3-summary': 'The geologic record reveals massive floods, such as those that formed the Kasei Valles, which drastically altered the planet.',
+                'eden-card3-button': 'Read more...',
+                'eden-card3-details': 'Features like the Kasei Valles, a channel system over 1,800 miles long, suggest that enormous volumes of water once flowed across the planet\'s surface. These outflow channels are believed to have formed from catastrophic floods, possibly triggered by the sudden release of subsurface water. Such events would have massively altered the planet\'s climate and surface conditions.',
+                'lost-paradise-title': 'The Lost Paradise',
+                'lost-paradise-subtitle': 'Mars\' habitable environment did not last. A series of planetary changes transformed it into the hostile world it is today, making surface life impossible.',
+                'decline-step1-title': 'Loss of Magnetic Field',
+                'decline-step1-text': 'Mars\' core cooled, weakening its protective magnetic field. Without this shield, the solar wind began stripping the planet of its atmosphere.',
+                'decline-step2-title': 'Thinning Atmosphere',
+                'decline-step2-text': 'With the atmosphere eroding, air pressure dropped dramatically. Liquid water on the surface either evaporated or froze.',
+                'decline-step3-title': 'Radiation and Desolation',
+                'decline-step3-text': 'Without atmospheric or magnetic protection, the surface became vulnerable to solar and cosmic radiation, sterilizing the planet.',
+                'migration-title': 'The Great Migration',
+                'migration-subtitle': 'This theory posits that the surviving Martian civilization migrated to Earth, bringing with them advanced knowledge and technology. They became the progenitors of modern humanity.',
+                'migration-p1': 'The theory posits that the surviving Martian civilization migrated to Earth, bringing with them advanced knowledge and technology. This migration could explain the sudden appearance of advanced human societies in Earth\'s history. Genetic studies have identified certain unique traits in humans not found in other primates, suggesting a possible extraterrestrial origin.',
+                'ancient-texts-title': 'Echoes in Ancient Texts',
+                'ancient-texts-subtitle': 'The narrative of a lost paradise and the origins of humanity found in many ancient myths, including the Bible, bear striking similarities to this scientific theory.',
+                'parallels-left-title': '🌳The Garden of Eden',
+                'parallels-left-text': 'The biblical account of the Garden of Eden as a lost paradise bears striking similarities to the proposed story of Mars. The expulsion from Eden could symbolize the catastrophic events that led to the decline of Martian habitability and the subsequent forced migration.',
+                'parallels-right-title': '⏳Long Lifespans',
+                'parallels-right-text': 'The long lifespans attributed to the first humans in the Bible may reflect the enhanced longevity of Martian inhabitants, who lived in a more favorable environment. These could be the genetic echoes of a past life on a different planet.',
+                'references-title': 'References',
+                'references-youtube-1': 'Mars Rover Captures Evidence of Lost Civilization?!',
+                'references-youtube-2': 'Mars Rover Curiosity SOL 0929',
+                'references-youtube-3': 'Mars Rover Curiosity SOL 1373',
+                'message-unsupported': 'Sorry, the language you entered is not yet supported. Please try a different language.',
+                'message-default-lang': 'No compatible language found. The site will be displayed in English.',
+                'close-button': 'Close',
+                'references-nasa-1': 'NASA\'s Curiosity Rover Detects Largest Organic Molecules Found on Mars. NASA.',
+                'references-nasa-2': 'NASA\'s Perseverance Rover Investigates Geologically Rich Mars Terrain. NASA.',
+                'references-nasa-3': 'NASA\'s Curiosity Finds Surprise Clues to Mars\' Watery Past. NASA.',
+                'references-nasa-4': 'NASA\'s Perseverance Rover Deciphers Ancient History of Martian Lake. NASA.'
+            },
+            'de': {
+                nativeName: 'Deutsch',
+                aliases: ['german', 'germano', 'deutsch', 'de', 'de_DE'],
+                'title-tag': 'Die Genesis der Menschheit: Von Mars nach Eden',
+                'nav-introduction': 'Einführung',
+                'nav-ancient-world': 'Alte Welt',
+                'nav-lost-paradise': 'Das verlorene Paradies',
+                'nav-migration': 'Migration',
+                'nav-ancient-texts': 'Alte Texte',
+                'nav-references': 'Referenzen',
+                'input-placeholder': 'Geben Sie \'de\', \'Deutsch\', oder \'japanese\' ein',
+                'button-text': 'Übersetzen',
+                'introduction-title': 'Die Genesis der Menschheit',
+                'introduction-subtitle': 'Eine wissenschaftliche Untersuchung der Theorie, die den Mars als das ursprüngliche Eden postuliert, eine verlorene Welt, deren Überlebende das Leben auf der Erde gesät haben könnten.',
+                'intro-p1': 'Die Suche nach den Ursprüngen des Menschen war lange Zeit ein Thema der Faszination. Während traditionelle Narrative die Anfänge der Menschheit oft auf die Erde zurückführen, deuten neue wissenschaftliche Beweise auf einen komplexeren und faszinierenderen Ursprung hin, der die Menschheit mit dem Planeten Mars verbinden könnte. Diese Theorie besagt, dass frühe Menschen oder eine Vorläuferart einst auf dem Mars gediehen, einem Planeten, der in seiner fernen Vergangenheit lebensfreundliche Bedingungen bot. Im Laufe der Zeit machten katastrophale Ereignisse den Mars unbewohnbar, was die Migration seiner Bewohner zur Erde auslöste. Dieses Narrativ verwebt sich mit alten Mythen, wie der biblischen Erzählung vom Garten Eden, und bietet eine überzeugende Synthese aus Wissenschaft und Legende.',
+                'ancient-world-title': 'Eine alte, bewohnbare Welt',
+                'ancient-world-subtitle': 'Wissenschaftliche Beweise deuten darauf hin, dass der frühe Mars sich stark von der eisigen Wüste unterschied, die wir heute kennen. Er war eine dynamische Welt mit den wichtigsten Zutaten für das Leben. Erkunden Sie die Beweise unten.',
+                'eden-card1-title': '💧Beweise für altes Wasser',
+                'eden-card1-summary': 'Missionen wie Curiosity und Perseverance haben trockene Flussbetten, Deltas und Mineralien gefunden, die sich nur in Anwesenheit von Wasser bilden.',
+                'eden-card1-button': 'Weiterlesen...',
+                'eden-card1-details': 'Der Curiosity-Rover hat im Gale-Krater Sedimentstrukturen identifiziert, die auf langlebige Seen und Flüsse hinweisen. Die Entdeckung von Gesteinen mit Wellenrillen deutet auf alte Küstenlinien hin, während Mineralablagerungen auf die Verdunstung von Wassermassen hindeuten. Diese Erkenntnisse werden durch die Beobachtungen des Perseverance-Rovers im Jezero-Krater bestätigt, wo eine Delta-Formation auf die frühere Existenz eines Flusssystems hinweist, das in einen See mündete.',
+                'eden-card2-title': '💨Dichte Atmosphäre',
+                'eden-card2-summary': 'Die Forschung zeigt, dass der Mars eine viel dichtere Atmosphäre hatte, die in der Lage war, Wärme zu speichern und Temperaturen über dem Gefrierpunkt zu halten.',
+                'eden-card2-button': 'Weiterlesen...',
+                'eden-card2-details': 'Die frühe Atmosphäre wird auf 10 bis 20 Mal dichter geschätzt als heute. Dieser atmosphärische Schild hätte einen Treibhauseffekt erzeugt, ein gemäßigtes Klima aufrechterhalten und die Existenz von flüssigem Wasser auf der Oberfläche ermöglicht. Das Vorhandensein von Mineralien wie Tonen und Karbonaten, die sich in wässrigen Umgebungen bilden, stützt diese Hypothese.',
+                'eden-card3-title': '💥Katastrophale Ereignisse',
+                'eden-card3-summary': 'Der geologische Befund zeigt massive Überschwemmungen, wie sie die Kasei Valles bildeten, die den Planeten drastisch veränderten.',
+                'eden-card3-button': 'Weiterlesen...',
+                'eden-card3-details': 'Merkmale wie die Kasei Valles, ein Kanalsystem, das über 1.800 Meilen lang ist, deuten darauf hin, dass einst enorme Wassermengen über die Oberfläche des Planeten flossen. Es wird angenommen, dass diese Abflusskanäle durch katastrophale Überschwemmungen entstanden sind, die möglicherweise durch die plötzliche Freisetzung von unterirdischem Wasser ausgelöst wurden. Solche Ereignisse hätten das Klima und die Oberflächenbedingungen des Planeten massiv verändert.',
+                'lost-paradise-title': 'Das verlorene Paradies',
+                'lost-paradise-subtitle': 'Die bewohnbare Umgebung des Mars hielt nicht an. Eine Reihe von planetaren Veränderungen verwandelte ihn in die feindselige Welt, die er heute ist, und machte Oberflächenleben unmöglich.',
+                'decline-step1-title': 'Verlust des Magnetfelds',
+                'decline-step1-text': 'Der Kern des Mars kühlte ab und schwächte sein schützendes Magnetfeld. Ohne diesen Schild begann der Sonnenwind, dem Planeten seine Atmosphäre zu entziehen.',
+                'decline-step2-title': 'Verdünnung der Atmosphäre',
+                'decline-step2-text': 'Da die Atmosphäre erodierte, sank der Luftdruck drastisch. Flüssiges Wasser auf der Oberfläche verdampfte oder fror ein.',
+                'decline-step3-title': 'Strahlung und Trostlosigkeit',
+                'decline-step3-text': 'Ohne atmosphärischen oder magnetischen Schutz wurde die Oberfläche anfällig für Sonnen- und kosmische Strahlung, was den Planeten sterilisierte.',
+                'migration-title': 'Die Große Migration',
+                'migration-subtitle': 'Diese Theorie besagt, dass die überlebende marsianische Zivilisation zur Erde migrierte und fortgeschrittenes Wissen und Technologie mitbrachte. Sie wurden zu den Stammvätern der modernen Menschheit.',
+                'migration-p1': 'Die Theorie besagt, dass die überlebende marsianische Zivilisation zur Erde migrierte und fortschrittliches Wissen und Technologie mitbrachte. Diese Migration könnte das plötzliche Auftreten fortgeschrittener menschlicher Gesellschaften in der Geschichte der Erde erklären. Genetische Studien haben bestimmte einzigartige Merkmale bei Menschen identifiziert, die bei anderen Primaten nicht vorkommen, was auf einen möglichen außerirdischen Ursprung hindeutet.',
+                'ancient-texts-title': 'Echos in alten Texten',
+                'ancient-texts-subtitle': 'Die Erzählung von einem verlorenen Paradies und den Ursprüngen der Menschheit, die in vielen alten Mythen, einschließlich der Bibel, zu finden ist, weist verblüffende Ähnlichkeiten mit dieser wissenschaftlichen Theorie auf.',
+                'parallels-left-title': '🌳Der Garten Eden',
+                'parallels-left-text': 'Die biblische Erzählung vom Garten Eden als verlorenes Paradies weist verblüffende Ähnlichkeiten mit der vorgeschlagenen Geschichte des Mars auf. Die Vertreibung aus Eden könnte die katastrophalen Ereignisse symbolisieren, die zum Niedergang der Bewohnbarkeit des Mars und zur anschließenden erzwungenen Migration führten.',
+                'parallels-right-title': '⏳Lange Lebensspannen',
+                'parallels-right-text': 'Die langen Lebensspannen, die den ersten Menschen in der Bibel zugeschrieben werden, könnten die erhöhte Langlebigkeit der marsianischen Bewohner widerspiegeln, die in einer günstigeren Umgebung lebten. Dies könnten die genetischen Echos eines früheren Lebens auf einem anderen Planeten sein.',
+                'references-title': 'Referenzen',
+                'references-youtube-1': 'Mars Rover Captures Evidence of Lost Civilization?!',
+                'references-youtube-2': 'Mars Rover Curiosity SOL 0929',
+                'references-youtube-3': 'Mars Rover Curiosity SOL 1373',
+                'message-unsupported': 'Entschuldigung, die eingegebene Sprache wird noch nicht unterstützt. Bitte versuchen Sie eine andere Sprache.',
+                'message-default-lang': 'Keine kompatible Sprache gefunden. Die Seite wird auf Englisch angezeigt.',
+                'close-button': 'Schließen',
+                'references-nasa-1': 'NASA\'s Curiosity Rover Finds Largest Organic Molecules on Mars. NASA.',
+                'references-nasa-2': 'NASA\'s Perseverance Rover Investigates Geologically Rich Mars Terrain. NASA.',
+                'references-nasa-3': 'NASA\'s Curiosity Finds Surprise Clues to Mars\' Watery Past. NASA.',
+                'references-nasa-4': 'NASA\'s Perseverance Rover Deciphers Ancient History of Martian Lake. NASA.'
+            },
+            'ja': {
+                nativeName: '日本語',
+                aliases: ['japanese', 'japan', 'ja', 'ja_JP'],
+                'title-tag': '人類の創世記：火星からエデンへ',
+                'nav-introduction': 'はじめに',
+                'nav-ancient-world': '古代の世界',
+                'nav-lost-paradise': '失われた楽園',
+                'nav-migration': '移住',
+                'nav-ancient-texts': '古代の文献',
+                'nav-references': '参考文献',
+                'input-placeholder': '\'ja\'、\'日本語\'、または\'english\'と入力',
+                'button-text': '翻訳',
+                'introduction-title': '人類の創世記',
+                'introduction-subtitle': '火星を元々のエデンと仮定する理論の科学的探求。その失われた世界の生存者が地球に生命を蒔いたかもしれない。',
+                'intro-p1': '人類の起源を理解する探求は、長い間魅力的なテーマでした。伝統的な物語が人類の始まりを地球にたどる一方、新興の科学的証拠は、人類を火星という惑星と結びつける、より複雑で興味深い起源を示唆しています。この理論は、初期の人類またはその前身種が、遠い過去に生命に適した条件を持っていた火星でかつて繁栄したと仮定しています。時が経つにつれて、壊滅的な出来事が火星を居住不能にし、その住民が地球へ移住することになりました。この物語は、聖書のエデンの園の記述のような古代の神話と絡み合い、科学と伝説の説得力のある統合を提供します。',
+                'ancient-world-title': '古代の居住可能な世界',
+                'ancient-world-subtitle': '科学的証拠は、初期の火星が私たちが今日知っている凍った砂漠とは大きく異なっていたことを示唆しています。それは生命の主要な要素を持つダイナミックな世界でした。以下の証拠を探求してください。',
+                'eden-card1-title': '💧古代の水に関する証拠',
+                'eden-card1-summary': 'キュリオシティやパーシビアランスのようなミッションは、水の存在下でのみ形成される乾燥した川床、デルタ、鉱物を発見しました。',
+                'eden-card1-button': 'もっと読む...',
+                'eden-card1-details': 'ゲール・クレーターのキュリオシティ・ローバーは、長期間にわたる湖や川を示す堆積構造を特定しました。波紋のある岩石の発見は古代の海岸線の存在を示唆し、鉱物堆積物は水域の蒸発を指し示しています。これらの発見は、ジェゼロ・クレーターでのパーシビアランス・ローバーの観測によって裏付けられており、そこでのデルタ形成は、かつて湖に流れ込んでいた河川システムの存在を示しています。',
+                'eden-card2-title': '💨分厚い大気',
+                'eden-card2-summary': '研究によると、火星は今日よりもはるかに濃い大気を持っており、熱を閉じ込めて氷点以上の温度を維持することができました。',
+                'eden-card2-button': 'もっと読む...',
+                'eden-card2-details': '初期の大気は今日の10倍から20倍濃かったと推定されています。この大気シールドは温室効果を生み出し、温暖な気候を維持し、表面に液体の水が存在することを可能にしたでしょう。水環境で形成される粘土や炭酸塩のような鉱物の存在が、この仮説を裏付けています。',
+                'eden-card3-title': '💥壊滅的な出来事',
+                'eden-card3-summary': '地質学的記録は、火星を劇的に変えた大洪水、例えばカセイ・ヴァレスを形成したようなものを明らかにしています。',
+                'eden-card3-button': 'もっと読む...',
+                'eden-card3-details': 'カセイ・ヴァレスのような特徴（1,800マイル以上の長さのチャネルシステム）は、かつて巨大な量の水が惑星の表面を流れていたことを示唆しています。これらの流出チャネルは、地下水の突然の放出によって引き起こされた可能性のある壊滅的な洪水から形成されたと考えられています。このような出来事は、惑星の気候と表面条件を大規模に変えたでしょう。',
+                'lost-paradise-title': '失われた楽園',
+                'lost-paradise-subtitle': '火星の居住可能な環境は長続きしませんでした。一連の惑星の変化が火星を今日のような敵対的な世界に変え、表面での生活を不可能にしました。',
+                'decline-step1-title': '磁場の喪失',
+                'decline-step1-text': '火星の核が冷え、保護磁場が弱まりました。このシールドがなければ、太陽風は惑星の大気を剥ぎ取り始めました。',
+                'decline-step2-title': '大気の希薄化',
+                'decline-step2-text': '大気が侵食されるにつれて、気圧は劇的に低下しました。表面の液体の水は蒸発するか凍結しました。',
+                'decline-step3-title': '放射線と荒廃',
+                'decline-step3-text': '大気や磁気の保護がなければ、表面は太陽や宇宙線に弱くなり、惑星を不毛にしました。',
+                'migration-title': '大移住',
+                'migration-subtitle': 'この理論は、生き残った火星の文明が、高度な知識と技術を携えて地球に移住したと仮定しています。彼らは現代の人類の祖先になりました。',
+                'migration-p1': 'この理論は、生き残った火星の文明が、高度な知識と技術を携えて地球に移住したと仮定しています。この移住は、地球の歴史における高度な人類社会の突然の出現を説明できるかもしれません。遺伝学の研究は、他の霊長類には見られない人類の特定のユニークな特徴を特定しており、地球外起源の可能性を示唆しています。',
+                'ancient-texts-title': '古代の文献に残る反響',
+                'ancient-texts-subtitle': '失われた楽園と人類の起源に関する物語は、聖書を含む多くの古代神話に見られ、この科学的理論と驚くほど類似しています。',
+                'parallels-left-title': '🌳エデンの園',
+                'parallels-left-text': '失われた楽園としてエデンの園を記した聖書の記述は、提案された火星の物語と驚くほど類似しています。エデンからの追放は、火星の居住可能性の低下とそれに続く強制移住につながった壊滅的な出来事を象徴している可能性があります。',
+                'parallels-right-title': '⏳長い寿命',
+                'parallels-right-text': '聖書で初期の人類に帰せられる長い寿命は、より好ましい環境で生活した火星の住民の増強された長寿を反映している可能性があります。これらは、別の惑星での過去の生命の遺伝的な反響である可能性があります。',
+                'references-title': '参考文献',
+                'references-youtube-1': '火星探査車が失われた文明の証拠を捉えた?!',
+                'references-youtube-2': '火星探査車キュリオシティ SOL 0929',
+                'references-youtube-3': '火星探査車キュリオシティ SOL 1373',
+                'message-unsupported': '申し訳ありませんが、入力された言語はまだサポートされていません。別の言語でお試しください。',
+                'message-default-lang': '互換性のある言語が見つかりませんでした。サイトは英語で表示されます。',
+                'close-button': '閉じる',
+                'references-nasa-1': 'NASAのキュリオシティ・ローバーが火星で最大の有機分子を発見。NASA。',
+                'references-nasa-2': 'NASAのパーシビアランス・ローバーが地質学的に豊かな火星の地形を調査。NASA。',
+                'references-nasa-3': 'NASAのキュリオシティが火星の水の過去への驚くべき手がかりを発見。NASA。',
+                'references-nasa-4': 'NASAのパーシビアランス・ローバーが火星の湖の古代史を解読。NASA。'
+            }
+        };
+
+        const references = {
+            nasa1: {
+                link: 'https://www.nasa.gov/press-release/nasas-curiosity-rover-detects-largest-organic-molecules-found-on-mars',
+                textKey: 'references-nasa-1'
+            },
+            jpl1: {
+                link: 'https://www.jpl.nasa.gov/news/nasas-perseverance-rover-investigates-geologically-rich-mars-terrain',
+                textKey: 'references-nasa-2'
+            },
+            youtube1: {
+                link: 'https://youtube.com/shorts/iUa1x7YIPXQ?si=u378TVnLYg6_nohE',
+                textKey: 'references-youtube-3'
+            },
+            youtube2: {
+                link: 'https://www.youtube.com/shorts/5C8V-FEkne0',
+                textKey: 'references-youtube-2'
+            },
+            youtube3: {
+                link: 'https://www.youtube.com/watch?v=58cE1jki7bE',
+                textKey: 'references-youtube-1'
+            },
+            jpl2: {
+                link: 'https://www.jpl.nasa.gov/news/nasas-curiosity-finds-surprise-clues-to-mars-watery-past',
+                textKey: 'references-nasa-3'
+            },
+            jpl3: {
+                link: 'https://www.jpl.nasa.gov/news/nasas-perseverance-rover-deciphers-ancient-history-of-martian-lake',
+                textKey: 'references-nasa-4'
+            }
+        };
+
+        let currentLang = 'es';
+        const languageInput = document.getElementById('custom-language-input');
+        const translateBtn = document.getElementById('custom-language-btn');
+        const detailsToggles = document.querySelectorAll('.details-toggle');
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const messageBox = document.getElementById('messageBox');
+        const messageText = document.getElementById('messageText');
+        const closeBtn = document.getElementById('closeBtn');
+        const overlay = document.getElementById('overlay');
+        const body = document.body;
+
+        const marsGif = 'https://media.tenor.com/NMmKyRCB5LAAAAAM/mars-planet.gif';
+        const edenImage = 'https://media.swncdn.com/via/9367-flickr-faunggs-photos.jpg';
+        let isMarsBackground = true;
+
+        // Función para cambiar el fondo
+        function updateBackground() {
+            body.style.backgroundImage = `url(${isMarsBackground ? marsGif : edenImage})`;
+        }
+
+        // Función para obtener el idioma del navegador
+        const getBrowserLanguage = () => {
+            const browserLang = navigator.language.split('-')[0];
+            const foundLang = Object.keys(translations).find(lang => translations[lang].aliases.includes(browserLang));
+            return foundLang || 'en';
+        };
+
+        // Función para traducir todo el texto
+        const translateAllText = (lang) => {
+            const translationMap = translations[lang];
+            if (!translationMap) {
+                console.error(`No translation found for language: ${lang}`);
+                return;
+            }
+            
+            // Traducir todos los elementos con data-section
+            document.querySelectorAll('[data-section]').forEach(element => {
+                const sectionKey = element.getAttribute('data-section');
+                if (translationMap[sectionKey]) {
+                    element.textContent = translationMap[sectionKey];
+                }
+            });
+
+            // Traducir todos los elementos con data-content
+            document.querySelectorAll('[data-content]').forEach(element => {
+                const contentKey = element.getAttribute('data-content');
+                if (translationMap[contentKey]) {
+                    element.textContent = translationMap[contentKey];
+                }
+            });
+
+            // Traducir los enlaces de navegación con sus IDs
+            document.getElementById('nav-introduction').textContent = translationMap['nav-introduction'];
+            document.getElementById('nav-ancient-world').textContent = translationMap['nav-ancient-world'];
+            document.getElementById('nav-lost-paradise').textContent = translationMap['nav-lost-paradise'];
+            document.getElementById('nav-migration').textContent = translationMap['nav-migration'];
+            document.getElementById('nav-ancient-texts').textContent = translationMap['nav-ancient-texts'];
+            document.getElementById('nav-references').textContent = translationMap['nav-references'];
+
+            // Traducir el placeholder del input
+            const inputPlaceholder = document.getElementById('custom-language-input');
+            if (translationMap['input-placeholder']) {
+                inputPlaceholder.placeholder = translationMap['input-placeholder'];
+            }
+
+            // Actualizar referencias
+            const referencesList = document.getElementById('references-list');
+            if (referencesList) {
+                referencesList.innerHTML = '';
+                for (const key in references) {
+                    const item = references[key];
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = item.link;
+                    a.textContent = translationMap[item.textKey] || item.link; // Usar el texto traducido o el enlace si no existe
+                    a.target = '_blank';
+                    a.classList.add('hover:underline', 'text-cyan-400');
+                    li.appendChild(a);
+                    referencesList.appendChild(li);
+                }
+            }
+        };
+
+        // Función para mostrar mensajes modales
+        const showMessage = (message, isError = false) => {
+            messageText.textContent = message;
+            messageBox.style.display = 'block';
+            overlay.style.display = 'block';
+        };
+
+        // Evento del botón de traducción
+        translateBtn.addEventListener('click', () => {
+            const langInput = languageInput.value.toLowerCase().trim();
+            const foundLang = Object.keys(translations).find(lang => translations[lang].aliases.some(alias => langInput.includes(alias)));
+            
+            if (foundLang) {
+                currentLang = foundLang;
+                translateAllText(currentLang);
+            } else {
+                showMessage(translations[currentLang]['message-unsupported']);
+            }
+        });
+
+        // Evento para los botones de "Leer más"
+        detailsToggles.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-target');
+                const target = document.getElementById(targetId);
+                const contentKey = button.getAttribute('data-content') === translations.es['eden-card1-button'] ? 'eden-card1-button' :
+                                    button.getAttribute('data-content') === translations.es['eden-card2-button'] ? 'eden-card2-button' : 'eden-card3-button';
+                
+                if (target.classList.contains('open')) {
+                    target.classList.remove('open');
+                    button.textContent = translations[currentLang][contentKey];
+                } else {
+                    target.classList.add('open');
+                    button.textContent = translations[currentLang][contentKey];
+                }
+            });
+        });
+
+        // Evento para el scroll para marcar el enlace de navegación activo y cambiar el fondo
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Cambiar el fondo del body
+            const ancientWorldSection = document.getElementById('ancient-world');
+            const ancientWorldTop = ancientWorldSection.offsetTop;
+            const scrollPosition = window.pageYOffset;
+
+            if (scrollPosition >= ancientWorldTop - window.innerHeight / 2) {
+                if (isMarsBackground) {
+                    isMarsBackground = false;
+                    updateBackground();
+                }
+            } else {
+                if (!isMarsBackground) {
+                    isMarsBackground = true;
+                    updateBackground();
+                }
+            }
+        });
+
+        // Evento para cerrar el modal
+        closeBtn.addEventListener('click', () => {
+            messageBox.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+
+        // Traducción inicial al cargar la página y ajuste de fondo
+        window.onload = function() {
+            const langToSet = getBrowserLanguage();
+            currentLang = langToSet;
+            translateAllText(currentLang);
+            updateBackground();
+        };
+
+    </script>
+</body>
+</html>
